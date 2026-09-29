@@ -9,3 +9,14 @@ export async function dohvatiZadatke(){
 
     return (await response.json()).todos
 }
+
+export async function postZadatak(zadatak){
+
+    fetch('https://dummyjson.com/todos/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(zadatak)
+      })
+      .then(res => res.json())
+      .then(console.log);
+}
