@@ -11,12 +11,22 @@ export async function dohvatiZadatke(){
 }
 
 export async function postZadatak(zadatak){
+    try{
+        const response = await fetch(apiEnpoint+"/add", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(zadatak)});
 
-    fetch('https://dummyjson.com/todos/add', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(zadatak)
-      })
-      .then(res => res.json())
-      .then(console.log);
+        if(!response.ok)
+            throw new Error("Greska prilikom postanja zadatka");
+
+        const data = response.json();
+        return data;
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+    
 }
+

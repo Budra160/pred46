@@ -37,23 +37,39 @@ function prikaziZadatke() {
 
 //Event listener gumb -Josip
 
-const gumb = document.getElementById("submit");
+const form = document.getElementById("upload");
 
-gumb.addEventListener("click", e => {
+form.addEventListener("submit", e => {
     e.preventDefault();
 
-    const zadText = document.getElementById("zad").value;
-    const zadId = document.getElementById("zadId").value;
-    const userId = Math.round((Math.random()), 2) * 100;
-    let zadObj = {
-        id : zadId,
-        todo: zadText,
-        completed: false,
-        userId : userId
-    };
+    const zadText = document.getElementById("zad").value.trim("");
+    const userId = document.getElementById("zadId").value.trim("");
+    let zadObj;
+    let postZad;
 
-    postZadatak(zadObj);
-    zadaciWrapper.innerHTML += zadObj ? Zadatak(zadObj) : alert("Nešto je pošlo krivu");
+    if(zadText && userId)
+        zadObj = {
+            todo: zadText,
+            completed: false,
+            userId : Number(userId),
+        };
+    
+    async function POST(){
+        try{
+            postZad = await postZadatak(zadObj);
+            if(!postZad)
+            throw new Error("Nije uspješno!!");
+            
+            zadaciWrapper.innerHTML += Zadatak(postZad);
+        }
+        catch{
+            console.log("Nešto je pošlo po zlu")
+        }
+        
+    }
+    POST();
 
-    console.log(zadObj);
+
+
+    
 })

@@ -6,7 +6,7 @@ export function createForm(id){
             <h3>Upišite podatke</h3>
 
             <div class="input-wrapper">
-                <label class="labelcss" for="zad">Upišite novi zadatak</label>
+                <label for="zad">Upišite novi zadatak</label>
                 <input
                     type="text"
                     id="zad"
@@ -15,7 +15,7 @@ export function createForm(id){
                 >
             </div>
             <div class="input-wrapper">
-                <label for="zadId">Upišite id novog zadatka</label>
+                <label for="zadId">Upišite user ID</label>
                 <input
                     type="number"
                     id="zadId"
@@ -24,7 +24,7 @@ export function createForm(id){
                 >
             </div>
 
-            ${Button("Dodaj zadatak","gumb",{id : "submit"})}
+            ${Button("Dodaj zadatak","gumb",{type:"submit"})}
             </form>
         
     `
